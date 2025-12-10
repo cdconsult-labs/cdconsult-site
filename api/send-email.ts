@@ -16,7 +16,6 @@ export default async function handler(req: any, res: any) {
       },
     });
 
-
     await transporter.sendMail({
       from: `"Site CD Consult" <${process.env.EMAIL_USER}>`,
       to: "katiane2990@gmail.com", // Substitua pelo e-mail de destino
