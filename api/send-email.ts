@@ -19,7 +19,7 @@ export default async function handler(req: any, res: any) {
     await transporter.sendMail({
       from: `"Site CD Consult" <${process.env.EMAIL_USER}>`,
       to: "katiane2990@gmail.com", // Substitua pelo e-mail de destino
-      subject: "Novo contato pelo site",
+      subject: `Novo contato do site - ${name} (${new Date().toLocaleString()})`,
       html: `
         <h3>Novo contato através do site</h3>
         <p><strong>Nome:</strong> ${name}</p>
