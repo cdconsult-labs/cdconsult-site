@@ -17,7 +17,7 @@ export default async function handler(req: any, res: any) {
     });
 
     await transporter.sendMail({
-      from: `"Site Institucional" <${process.env.EMAIL_USER}>`,
+      from: `"Site CD Consult" <${process.env.EMAIL_USER}>`,
       to: "katiane2990@gmail.com",
       subject: "Novo contato pelo site",
       html: `
