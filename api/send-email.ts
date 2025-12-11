@@ -7,6 +7,13 @@ export default async function handler(req: any, res: any) {
 
   const { name, company, email, phone, message } = req.body;
 
+  const recipientEmail = process.env.EMAIL_TO;
+
+  if (!recipientEmail) {
+    console.error("Variável de ambiente EMAIL_TO não configurada.");
+    return res.status(500).json({ message: "Erro de configuração do servidor." });
+  }
+
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -18,7 +25,7 @@ export default async function handler(req: any, res: any) {
 
     await transporter.sendMail({
       from: `"Site CD Consult" <${process.env.EMAIL_USER}>`,
-      to: "contato@cdconsult.net", // Substitua pelo e-mail de destino
+      to: recipientEmail, 
       subject: `Novo contato do site - ${name} (${new Date().toLocaleString()})`,
       html: `
         <h3>Novo contato através do site</h3>
@@ -26,7 +33,8 @@ export default async function handler(req: any, res: any) {
         <p><strong>Empresa:</strong> ${company}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Telefone:</strong> ${phone}</p>
-        <p><strong>Mensagem:</strong><br>${message}</p>
+        <p><strong>Mensagem:</strong>  
+${message}</p>
       `,
     });
 
